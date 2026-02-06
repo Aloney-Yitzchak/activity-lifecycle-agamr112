@@ -1,51 +1,59 @@
-package com.example.lifecyclelogger;
+package com.example.trial;
 
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
-/**
- * Activity Lifecycle Logger - משימה 1
- * 
- * המשימה שלכם: הוסיפו הודעות Log.d() לכל פונקציות מחזור החיים.
- * 
- * פונקציות שצריך להוסיף:
- * 1. onCreate() - כבר קיימת, רק צריך להוסיף Log
- * 2. onStart()
- * 3. onResume()
- * 4. onPause()
- * 5. onStop()
- * 6. onDestroy()
- * 
- * דוגמה להודעת Log:
- * Log.d("LifecycleDemo", "onCreate called");
- */
 public class MainActivity extends AppCompatActivity {
-
-    // TAG לשימוש ב-Log - השתמשו בזה בכל ההודעות
-    private static final String TAG = "LifecycleDemo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        
-        // TODO: הוסיפו כאן הודעת Log.d() שאומרת שנקראה onCreate
-        
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("LifecycleDemo", "onStart called");
     }
 
-    // TODO: הוסיפו את הפונקציה onStart() עם הודעת Log
-    
 
-    // TODO: הוסיפו את הפונקציה onResume() עם הודעת Log
-    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("LifecycleDemo", "onResume called");
+    }
 
-    // TODO: הוסיפו את הפונקציה onPause() עם הודעת Log
-    
 
-    // TODO: הוסיפו את הפונקציה onStop() עם הודעת Log
-    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("LifecycleDemo", "onPause called");
+    }
 
-    // TODO: הוסיפו את הפונקציה onDestroy() עם הודעת Log
-    
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("LifecycleDemo", "onStop called");
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("LifecycleDemo", "onDestroy called");
+    }
+
 }
